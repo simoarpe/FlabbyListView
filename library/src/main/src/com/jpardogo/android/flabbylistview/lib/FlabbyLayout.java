@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class FlabbyLayout extends FrameLayout {
     private static final String TAG = FlabbyLayout.class.getSimpleName();
-    private static final float MAX_CURVATURE = 100;
+    private static final float MAX_CURVATURE = 40;
     private Path mPath;
     private Paint mPaint;
     private Rect mRect;
@@ -66,14 +66,16 @@ public class FlabbyLayout extends FrameLayout {
         canvas.clipRect(mRect, Region.Op.REPLACE);
 
         if (!isUserTouching) {
+        	
             if (mDeltaY > -MAX_CURVATURE && mDeltaY < MAX_CURVATURE) mCurvature = mDeltaY * 2;
             topCellPath(mOneFifthWidth, mFourFifthWith, mCurvature);
             bottomCellPath(mFourFifthWith, mOneFifthWidth, mHeight + mCurvature);
-        } else {
-            float curvature = isSelectedView?-mCurvature:mCurvature;
-            topCellPath(mFingerX,mFingerX,curvature);
-            curvature = isSelectedView?mHeight-curvature:mHeight;
-            bottomCellPath(mFingerX,mFingerX,curvature);
+        } 
+        else {
+//            float curvature = isSelectedView?-mCurvature:mCurvature;
+//            topCellPath(mFingerX,mFingerX,curvature);
+//            curvature = isSelectedView?mHeight-curvature:mHeight;
+//            bottomCellPath(mFingerX,mFingerX,curvature);
         }
 
         canvas.drawPath(mPath, mPaint);

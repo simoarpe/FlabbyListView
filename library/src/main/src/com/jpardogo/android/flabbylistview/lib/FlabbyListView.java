@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 public class FlabbyListView extends ListView {
     private static final String TAG = FlabbyListView.class.getSimpleName();
-    private static final float PIXELS_SCROLL_TO_CANCEL_EXPANSION=100;
+    private static final float PIXELS_SCROLL_TO_CANCEL_EXPANSION=40;
     private View mTrackedChild;
     private FlabbyLayout mDownView;
     private FlabbyLayout mDownBelowView;
@@ -78,7 +78,8 @@ public class FlabbyListView extends ListView {
                 int top = mTrackedChild.getTop();
                 float deltaY = top - mTrackedChildPrevTop;
 
-                if (deltaY == 0) {
+                if (Math.abs(deltaY) <= 0.8 ) {
+            //   if(deltaY == 0){
                     //When we scroll so fast the list this value becomes 0 all the time
                     // so we don't want the other list stop, and we give it the last
                     //no 0 value we have
